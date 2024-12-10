@@ -103,4 +103,163 @@ const filmy = [
 			'Na zámek v podhůří Krkonoš přijíždí jeho nový majitel Štěpán se svojí snoubenkou, krásnou komtesou Blankou, a mladším bratrem Adamem. Cestou kočár nešťastně srazí kolemjdoucí dívku, Adam jí pomůže a ona se do něj zamiluje. Na zámku Adam objeví starou vlašskou knihu, která by měla obsahovat cestu k pokladům. Tajemné značky vlašské knihy však nedokáže vyluštit ani národopisec Jiráček, který v kraji sbírá pověsti a nevychází z údivu nad tím, že zdejší lidé stále věří v Krakonoše. Na zámku se objeví záhadný cizinec a nabídne Štěpánovi, že jej k pokladu za určitých podmínek dovede. Výprava do hor může začít. Naplní se Liduščina láska k Adamovi? Jakou záhadu skrývá starý obraz na zámku Hůrka a co strašlivého se v horách kdysi odehrálo? A kdo je vlastně Krakonoš a jaké je jeho největší tajemství? (csfd.cz, Česká televize)',
 		premiera: '2022-12-24',
 	},
+	{
+		id: 'kuciak',
+		nazev: 'Kuciak: Vražda novináře',
+		plakat: {
+			url: 'https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/167/077/167077581_e92ec5.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Dokument o vraždě slovenského investigativního novináře a jeho snoubenky.',
+		popis:
+			"Chladnokrevná vražda investigativního novináře Jána Kuciaka a jeho snoubenky Martiny Kušnírové v únoru 2018 otřásla nejen Slovenskem. Proč museli zemřít? Dánský koprodukční dokument Kuciak: Vražda novináře rozplétá chapadla (nejen) slovenské mafie z cenné zahraniční perspektivy a s potřebným odstupem. Divákům přináší nikdy nezveřejněné záběry, málo známé informace a také autentické rozhovory s rodiči Jána a Martiny i s obhájcem hlavního obžalovaného podnikatele Mariana Kočnera. Unikátní policejní záběry a materiály vrhají na celý případ nové světlo.",
+		premiera: '2023-03-23',
+	},
+	{
+		id: 'mulan',
+		nazev: 'Legenda o Mulan',
+		plakat: {
+			url: 'https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/159/527/159527810_7c635d.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Příběh o mladé dívce, která chtěla být válečnicí, nezalekla se ničeho a vydala se cestou, kterou chtěla, i přes mnohé překážky.',
+		popis:
+			"Starověká Čína. Ani Velká zeď nedokázala zadržet hordy bojovných Hunů, kteří napadli mírumilovnou Říši středu. Moudrý a mezi lidem oblíbený císař proto vyhlašuje mobilizaci - jeden muž z každé rodiny musí vstoupit do armády, která má v rozhodující bitvě odrazit vojska dobyvatelů. Mezitím se v jedné zapadlé vesničce připravuje poněkud rozjívená dívka Mulan na své první setkání se svatební dohazovačkou. Nejsvatějším úkolem každé mladé ženy jsou totiž vdavky a oddaná služba manželovi. Jedině v této roli přinese Mulan své rodině radost a úctu celé vesnice. Naneštěstí Mulan je na tuctovou nevěstu trochu divoká a tak její setkání s dohazovačkou dopadne zcela katastrofálně. Tuhle holku si nikdo nikdy nevezme! A k dovršení rodinného neštěstí přijíždí do vesničky císařští verbíři. Starý otec Mulan bude muset nastoupit do armády, protože v rodině není žádný jiný muž. Ještě téže noci se Mulan rozhodne. Aby zachránila otce, ostříhá si vlasy, převlékne se za chlapce a narukuje. V nastávajících nebezpečných dobrodružstvích naštěstí nebude sama. S pomocí duchů rodinných předků a rodinného draka strážného zachrání Mulan Čínu před krvelačnými hordami divokých Hunů a pro sebe a svou rodinu získá úctu celé země.",
+		premiera: '1998-11-26',
+	},
 ]
+
+const vybranyFilm = window.location.hash.slice(1)
+console.log(vybranyFilm)
+const vybranyFilmData = filmy.find((item) => item.id === vybranyFilm)
+
+console.log(vybranyFilmData)
+
+const elStranka = document.querySelector(".container-lg")
+console.log(elStranka)
+
+
+
+elStranka.innerHTML = `
+			<div class="card mb-3" id="detail-filmu">
+				<div class="row g-0">
+					<div class="col-md-5">
+						<img
+							src=${vybranyFilmData.plakat.url}
+							alt="plakát"
+							class="img-fluid rounded-start"
+							width="663"
+							height="909"
+						/>
+					</div>
+					<div class="col-md-7">
+						<div class="card-body">
+							<h5 class="card-title">${vybranyFilmData.nazev}</h5>
+							<p class="card-text">${vybranyFilmData.popis}</p>
+							<p class="card-text">
+								<small class="text-muted" id="premiera"
+									>Premiéra <strong>24. prosince 2022</strong>, což je za 24
+									dní.</small
+								>
+							</p>
+							<h6>Hodnocení</h6>
+							<div class="stars">
+								<button
+									class="far fa-star button-star"
+									data-mdb-toggle="tooltip"
+									title="Nic moc"
+								>
+									1
+								</button>
+								<button
+									class="far fa-star button-star"
+									data-mdb-toggle="tooltip"
+									title="Ucházející"
+								>
+									2
+								</button>
+								<button
+									class="far fa-star button-star"
+									data-mdb-toggle="tooltip"
+									title="Dobrý"
+								>
+									3
+								</button>
+								<button
+									class="far fa-star button-star"
+									data-mdb-toggle="tooltip"
+									title="Skvělý"
+								>
+									4
+								</button>
+								<button
+									class="far fa-star button-star"
+									data-mdb-toggle="tooltip"
+									title="Úžasný"
+								>
+									5
+								</button>
+							</div>
+
+							<h6 class="mt-4">Poznámka</h6>
+							<form id="note-form">
+								<div class="row">
+									<div class="col-md-6 col-lg-7 col-xl-8 mb-2">
+										<div class="form-outline">
+											<textarea
+												class="form-control"
+												id="message-input"
+												rows="4"
+											></textarea>
+											<label class="form-label" for="message-input"
+												>Text poznámky</label
+											>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-5 col-xl-4">
+										<div class="form-check d-flex justify-content-center mb-2">
+											<input
+												class="form-check-input me-2 mb-2"
+												type="checkbox"
+												value=""
+												id="terms-checkbox"
+											/>
+											<label class="form-check-label" for="terms-checkbox">
+												Souhlasím se všeobecnými podmínky užívání.
+											</label>
+										</div>
+										<button type="submit" class="btn btn-primary btn-block">
+											Uložit
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+`
+
+const poznamka = document.querySelector("#note-form")
+poznamka.addEventListener("submit", (e) => {
+	e.preventDefault()
+	const textovePole = document.querySelector("#message-input")
+	const elCheckbox = document.querySelector("#terms-checkbox")
+	if (textovePole.value === "") {
+		textovePole.classList.add("is-invalid")
+		textovePole.focus()
+	} else {
+		textovePole.classList.remove("is-invalid")
+	}
+	if (elCheckbox.checked === false) {
+		elCheckbox.classList.add("is-invalid")
+		elCheckbox.focus()
+	} else {
+		elCheckbox.classList.remove("is-invalid")
+	}
+	if (textovePole.value !== "" && elCheckbox.checked === true) {
+		poznamka.innerHTML = `<p class="card-text">${textovePole.value}</p>`
+	}
+})
