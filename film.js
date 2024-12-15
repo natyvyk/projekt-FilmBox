@@ -312,3 +312,43 @@ hvezdicky.forEach((item) => {
 		zvyrazneniHvezdicek(posledniKliknutaHvezda)
 	})
 })
+
+
+//prehravac
+const elPrehravac = document.querySelector("#prehravac")
+const elPlay = document.querySelector(".play")
+const elVideo = document.querySelector("video")
+const elPause = document.querySelector(".pause")
+const elCurrentTime = document.querySelector(".current-time")
+
+elPlay.addEventListener("click", () => {
+	elVideo.play()
+})
+elVideo.addEventListener("playing", () => {
+	elPrehravac.classList.add("playing")
+})
+elPause.addEventListener("click", () => {
+	elVideo.pause()
+})
+elVideo.addEventListener("pause", () => {
+	elPrehravac.classList.remove("playing")
+})
+elVideo.addEventListener("timeupdate", () => {
+	const pocetPrehranychsekund = Math.floor(elVideo.currentTime)
+	console.log(pocetPrehranychsekund)
+	const pocetMinut = Math.floor(pocetPrehranychsekund/60)
+	const pocetSekundBezMinut = pocetPrehranychsekund%60
+	elCurrentTime.textContent = `${String(pocetMinut).padStart(2, "0")}:${String(pocetSekundBezMinut).padStart(2, "0")}`
+})
+document.addEventListener("keyup", (e) => {
+	if (e.code === "Space" &&
+		e.target.tagName !== 'TEXTAREA' &&
+		e.target.tagName !== 'INPUT' &&
+		e.target.tagName !== 'BUTTON') {
+		if (elVideo.paused) {
+			elVideo.play()
+		} else {
+			elVideo.pause()
+		}
+	}
+})
