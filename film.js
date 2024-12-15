@@ -134,14 +134,9 @@ const filmy = [
 const vybranyFilm = window.location.hash.slice(1)
 console.log(vybranyFilm)
 const vybranyFilmData = filmy.find((item) => item.id === vybranyFilm)
-
 console.log(vybranyFilmData)
 
 const elStranka = document.querySelector(".container-lg")
-console.log(elStranka)
-
-
-
 elStranka.innerHTML = `
 			<div class="card mb-3" id="detail-filmu">
 				<div class="row g-0">
@@ -254,7 +249,7 @@ poznamka.addEventListener("submit", (e) => {
 		textovePole.classList.remove("is-invalid")
 	}
 	if (elCheckbox.checked === false) {
-		elCheckbox.classList.add("is-invalid")
+	elCheckbox.classList.add("is-invalid")
 		elCheckbox.focus()
 	} else {
 		elCheckbox.classList.remove("is-invalid")
@@ -262,4 +257,58 @@ poznamka.addEventListener("submit", (e) => {
 	if (textovePole.value !== "" && elCheckbox.checked === true) {
 		poznamka.innerHTML = `<p class="card-text">${textovePole.value}</p>`
 	}
+})
+
+//datum
+const ted = dayjs()
+console.log(ted)
+const dataPremier = dayjs(vybranyFilmData.premiera)
+console.log(dataPremier)
+const vzdalenostMeziDatumy = dataPremier.diff(ted, "days")
+console.log(vzdalenostMeziDatumy)
+
+const elDatumPremiery = document.querySelector("#premiera")
+
+const premiera = (ted, dataPremier) => {
+	if (ted.isAfter(dataPremier)) {
+	elDatumPremiery.innerHTML = `Premiéra <strong>${dataPremier.format("D.M.YYYY")}</strong>, což bylo před ${-vzdalenostMeziDatumy} dny.`
+} if (!ted.isAfter(dataPremier)) {
+	elDatumPremiery.innerHTML = `Premiéra <strong>${dataPremier.format("D.M.YYYY")}</strong>, což bude za ${vzdalenostMeziDatumy} dní.`
+} if (ted === dataPremier) {
+	elDatumPremiery.innerHTML = `Premiéra <strong>${dataPremier.format("D.M.YYYY")}</strong>, což je dnes!`
+}
+}
+
+premiera(ted, dataPremier)
+
+//hvezdicky
+const hvezdicky = document.querySelectorAll(".fa-star")
+
+const zvyrazneniHvezdicek = (cislo) => {
+	hvezdicky.forEach((item, index) => {
+		if (index <= cislo) {
+			item.classList.add("fas")
+			item.classList.remove("far")
+		} if (index >= cislo) {
+			item.classList.add("far")
+			item.classList.remove("fas")
+		}
+	})
+}
+
+let posledniKliknutaHvezda = 
+
+hvezdicky.forEach((item) => {
+	item.addEventListener("click", (e) => {
+		const cislo = item.textContent
+		posledniKliknutaHvezda = cislo
+		zvyrazneniHvezdicek(cislo)
+	})
+	item.addEventListener("mouseenter", () => {
+		const cislo = item.textContent
+		zvyrazneniHvezdicek(cislo)
+	})
+	item.addEventListener("mouseleave", () => {
+		zvyrazneniHvezdicek(posledniKliknutaHvezda)
+	})
 })
